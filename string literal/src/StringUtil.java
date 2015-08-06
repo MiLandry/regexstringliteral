@@ -3,15 +3,29 @@ import java.util.regex.Pattern;
 
 
 public class StringUtil {
+	/*
+	 * the literal RE (as a non java string)
+	 * 
+	 * 
+([^\s\(!][^\s]*?(equals|equalsIgnoreCase)[.^\s]*?\(".*?"\))
+	 * 
+	 * 
+	 */
+	
+	static String equalsRE = "([^\\s\\(!][^\\s]*?(equals|equalsIgnoreCase)[.^\\s]*?\\(\".*?\"\\))";
 
-	public static String swapOperators(String string) {
-		// TODO Auto-generated method stub
-		
-		
-//		String test = "foo.equals(\"bar\")";
-//		String test2 = "edEligibilityCargo.getActivityType().equals(\"PR\")";
-//		
-//		string = test2;
+	static String equalsIgnoreCaseRE = "([^\\s\\(!][^\\s]*?equalsIgnoreCase.*?\\(\".*?\"\\))";
+	
+
+	/**
+	 * Returns a string representing the same expression but with the string literal 
+	 * on the left side and the object expression on the right
+	 * @param string A string representing a string comparison expression where 
+	 * the string literal is in the right parens, and object on the left
+	 * @return a string with the literal on the left.
+	 */
+	public static String swapOperators(String string) {	
+//		if (!string.matches(equalsRE)) throw new IllegalArgumentException();
 		
 		String literalInsideDoubleQuotes = "", objectexpression = "";  
 		
@@ -57,32 +71,29 @@ public class StringUtil {
 			}
 		}
 		
+		//first, check for Ignore case,
+		if (string.matches(equalsIgnoreCaseRE))
+		{
+		String result = String.format("\"%s\".equalsIgnoreCase(%s)", literalInsideDoubleQuotes, objectexpression);
+			
+			return result;			
+		}
+		
+		//otherwise, assume equals		
 		String result = String.format("\"%s\".equals(%s)", literalInsideDoubleQuotes, objectexpression);
-			
-
-			
 			
 			return result;
 	}
 	
 	public static String extractEqualsMethod(String str)
 	{
-		/*
-		 * the literal RE (as a non java string)
-		 * 
-		 * ([^\s\(!]*?equals.*\(".*?")
-		 * 
-		 */
-		
-//		String equalsRE = "(if ?\\(.*?equals.*\\(\".*?\")";
-		String equalsRE = "([^\\s\\(!]*?equals.*\\(\".*?\")";
 		
 		Pattern pattern = Pattern.compile(equalsRE);
     	Matcher matcher = pattern.matcher(str);
     	String result = "fail";
     	while (matcher.find())
     	{
-    		System.out.println("FOUND: " + matcher.group(1));
+    		System.out.println("An expression has been found: \n" + matcher.group(1) + "\n");
     		result = matcher.group(1);
     	}
 		
@@ -91,5 +102,32 @@ public class StringUtil {
 		
 	}
 	
+	public static String fixCode(String str)
+	{
+		
+		Pattern pattern = Pattern.compile(equalsRE);
+    	Matcher matcher = pattern.matcher(str);
+    	int counter = 0;
+    	while (matcher.find())
+    	{
+    		String targetExpression = matcher.group(1);
+    		System.out.println("An expression has been found: \n" + matcher.group(1) + "\n");
+    		
+    		String fixedExpression = swapOperators(targetExpression);
+    		fixedExpression = fixedExpression.replace("$", "\\$"); //escape $ characters
+    		str = matcher.replaceFirst(fixedExpression);
+    		matcher = pattern.matcher(str);
+    		counter ++;
+    	}
+    	
+    	System.out.println("total literals swapped: " + counter);
+    	
+    	
+    	
+    	return str;
+    	
+
+		
+	}
 
 }
