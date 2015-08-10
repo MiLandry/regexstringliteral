@@ -4,15 +4,19 @@ import java.util.regex.Pattern;
 
 public class StringUtil {
 	/*
-	 * the literal RE (as a non java string)
+	 * the literal RE (as a non java string), you can monkey around with the java string all you want, but do not replace the 
+	 * literal RE unless your tests pass
 	 * 
 	 * 
-([^\s\(!][^\s]*?(equals|equalsIgnoreCase)[.^\s]*?\(".*?"\))
+(\b(?!if\()[^\s\(!][^\s]*?(equals|equalsIgnoreCase)[.^\s]*?\(".*?"\))
 	 * 
 	 * 
 	 */
 	
-	static String equalsRE = "([^\\s\\(!][^\\s]*?(equals|equalsIgnoreCase)[.^\\s]*?\\(\".*?\"\\))";
+//	static String equalsRE = "(((?!if\\().)*[^\\s\\(!][^\\s]*?(equals|equalsIgnoreCase)[.^\\s]*?\\(\".*?\"\\))";
+	
+	
+	static String equalsRE = "(\\b(?!if\\()[^\\s\\(!][^\\s]*?(equals|equalsIgnoreCase)[.^\\s]*?\\(\".*?\"\\))";	
 
 	static String equalsIgnoreCaseRE = "([^\\s\\(!][^\\s]*?equalsIgnoreCase.*?\\(\".*?\"\\))";
 	

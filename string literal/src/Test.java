@@ -95,34 +95,5 @@ public class Test {
 				System.out.println("****************\n\n");	
 			}
 		}
-
-//
-//		for (int i = 0; i < testStringsJustExpressions.length; i++)
-//		{
-//			System.out.println("Input: \n" + testStringsJustExpressions[i]); 
-//			System.out.println("result: \n");
-//			System.out.println("Output: \n" + StringUtil.fixCode(testStringsJustExpressions[i]));
-//			System.out.println("****************\n\n");
-//		}
-//		
-//		for (int i = 0; i < testStringsSingleExpressionsWithNoise.length; i++)
-//		{
-//			System.out.println("Input: \n" + testStringsSingleExpressionsWithNoise[i]); 
-//			System.out.println("result: \n");
-//			System.out.println("Output: \n" + StringUtil.fixCode(testStringsSingleExpressionsWithNoise[i]));
-//			System.out.println("****************\n\n");
-//		}
-//		
-//		for (int i = 0; i < testStringsMultipleExpressionsWithNoise.length; i++)
-//		{
-//			System.out.println("Input: \n" + testStringsMultipleExpressionsWithNoise[i]); 
-//			System.out.println("result: \n");
-//			System.out.println("Output: \n" + StringUtil.fixCode(testStringsMultipleExpressionsWithNoise[i]));
-//			System.out.println("****************\n\n");
-//		}
-		
-		
-		// TODO Auto-generated method stub
-		
 	}
 }
