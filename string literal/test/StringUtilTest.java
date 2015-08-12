@@ -1,8 +1,10 @@
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
-
+@RunWith(value = Parameterized.class)
 public class StringUtilTest {
 	
 	
@@ -11,6 +13,8 @@ public class StringUtilTest {
 		"edEligibilityCargo.getActivityType().equals(\"PR\")",
 		"foo.equals(\"bar\")",
 		"reasonCd.equalsIgnoreCase(\"FP\")",
+//		"((String) foo.equals(\"bar\")",
+//		"(String) oSess.get(\"TCONFLICT_DETECTED\")).equals(\"true\")"
 	};
 	
 	static String[] testStringsJustExpressionsResults = {
@@ -18,6 +22,8 @@ public class StringUtilTest {
 		"\"PR\".equals(edEligibilityCargo.getActivityType())",
 		"\"bar\".equals(foo)",
 		"\"FP\".equalsIgnoreCase(reasonCd)",
+//		"\"bar\".equals((String) foo)",
+//		"(\"true\").equals((String) oSess.get(\"TCONFLICT_DETECTED\"))",
 	};
 	
 	
@@ -26,6 +32,7 @@ public class StringUtilTest {
 		"reasonCd.equalsIgnoreCase(\"FP\")",
 		"&& (!(dhsPaysTotalAmt.trim().equalsIgnoreCase(\"$ 0.00\")))",
 		"if(apptStatus.equals(\"NT\"))",
+//		"(\"true\").equals((String) oSess.get(\"TCONFLICT_DETECTED\"))",
 	};
 	
 	static String[] testStringsExtracted = {
@@ -33,6 +40,8 @@ public class StringUtilTest {
 		"reasonCd.equalsIgnoreCase(\"FP\")",
 		"dhsPaysTotalAmt.trim().equalsIgnoreCase(\"$ 0.00\")",
 		"apptStatus.equals(\"NT\")",
+//		"(\"true\").equals((String) oSess.get(\"TCONFLICT_DETECTED\"))",
+		
 	};
 	
 	private static String[] testStringsSingleExpressionsFixed = {
@@ -64,7 +73,7 @@ public class StringUtilTest {
 
 
 
-	private boolean debugSwap = false;
+	private boolean debugSwap = true;
 
 	private boolean debugExtract = false;   
     

@@ -9,14 +9,18 @@ public class StringUtil {
 	 * 
 	 * 
 (\b(?!if\()[^\s\(!][^\s]*?(equals|equalsIgnoreCase)[.^\s]*?\(".*?"\))
+
+or
+
+(\(String\) )?(\b(?!if\()[^\s\(!][^\s]*?(equals|equalsIgnoreCase)[.^\s]*?\(".*?"\))
 	 * 
 	 * 
 	 */
 	
-//	static String equalsRE = "(((?!if\\().)*[^\\s\\(!][^\\s]*?(equals|equalsIgnoreCase)[.^\\s]*?\\(\".*?\"\\))";
-	
-	
+
 	static String equalsRE = "(\\b(?!if\\()[^\\s\\(!][^\\s]*?(equals|equalsIgnoreCase)[.^\\s]*?\\(\".*?\"\\))";	
+//	static String equalsRE ="(\\(String\\) )?(\\b(?!if\\()[^\\s\\(!][^\\s]*?(equals|equalsIgnoreCase)[.^\\s]*?\\(\".*?\"\\))";
+	
 
 	static String equalsIgnoreCaseRE = "([^\\s\\(!][^\\s]*?equalsIgnoreCase.*?\\(\".*?\"\\))";
 	
