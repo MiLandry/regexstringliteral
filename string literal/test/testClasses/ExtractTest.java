@@ -23,13 +23,25 @@ public class ExtractTest {
 	}
 	
 
-	@Parameters(name = "{index}: input :{0} output: {1}")
+	@Parameters(name = "{index}: input :{0} Expected: {1}")
 	public static Iterable<Object[]> data1() {
 		return Arrays.asList(new Object[][] { 
-			{ "edEligibilityCargo.getActivityType().equals(\"PR\")", "\"PR\".equals(edEligibilityCargo.getActivityType())" }, 
-			{ "foo.equals(\"bar\")", "\"bar\".equals(foo)",}, 
-			{ 	"reasonCd.equalsIgnoreCase(\"FP\")", "\"FP\".equalsIgnoreCase(reasonCd)"}, 
-			{"((String) foo.equals(\"bar\")", "\"bar\".equals((String) foo)",},
+			//1
+			{ "edEligibilityCargo.getActivityType().equals(\"PR\")", "edEligibilityCargo.getActivityType().equals(\"PR\")" }, 
+			//2
+			{ "foo.equals(\"bar\")", "foo.equals(\"bar\")",}, 
+			//3
+			{ 	"reasonCd.equalsIgnoreCase(\"FP\")", "reasonCd.equalsIgnoreCase(\"FP\")"}, 			
+			//4
+			{" else if (reasonCd.equalsIgnoreCase(\"FP\"))", "reasonCd.equalsIgnoreCase(\"FP\")"},
+			{"&& (!(dhsPaysTotalAmt.trim().equalsIgnoreCase(\"$ 0.00\")))", "dhsPaysTotalAmt.trim().equalsIgnoreCase(\"$ 0.00\")"},
+			//5
+			{"if(apptStatus.equals(\"NT\"))", "apptStatus.equals(\"NT\")"}, 
+			//6
+			{"if (!serviceCodeDescList.equals(\"GROUP\") && !serviceCodeDescList.equals(\"INDV\")) {",
+			"serviceCodeDescList.equals(\"INDV\")"}, 
+			//7
+			{"((String) foo).equals(\"bar\")", "((String) foo).equals(\"bar\")",},
 		});
 	}
 

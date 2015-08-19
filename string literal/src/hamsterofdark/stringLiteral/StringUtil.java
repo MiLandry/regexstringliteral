@@ -12,7 +12,20 @@ public class StringUtil {
 	 * literal RE unless your tests pass
 	 * 
 	 * 
+current stable
 (\b(?!if\()[^\s\(!][^\s\|\&]*?(equals|equalsIgnoreCase)[.^\s]*?\(".*?"\))
+
+I feel really good about this one
+((\(\(String\) )?\b(?!if\()[^\s\(!][^\s\|\&]*?\)?\.(equals|equalsIgnoreCase)[.^\s]*?\(".*?"\))
+
+
+s1 trying to catch enclose String casts as object expression
+((?!if\()(\(\(String\) )?[^\s\(!][^\s\|\&]*?\)?\.(equals|equalsIgnoreCase)[.^\s]*?\(".*?"\))
+
+s2, removing odd first part
+
+
+s3
 
 or
 
@@ -22,8 +35,8 @@ or
 	 */
 	final static Logger logger = Logger.getLogger(StringUtil.class);
 
-	static String equalsRE = "(\\b(?!if\\()[^\\s\\(!][^\\s\\|\\&]*?(equals|equalsIgnoreCase)[.^\\s]*?\\(\".*?\"\\))";	
-//	static String equalsRE ="(\\(String\\) )?(\\b(?!if\\()[^\\s\\(!][^\\s]*?(equals|equalsIgnoreCase)[.^\\s]*?\\(\".*?\"\\))";
+//	static String equalsRE = "(\\b(?!if\\()[^\\s\\(!][^\\s\\|\\&]*?(equals|equalsIgnoreCase)[.^\\s]*?\\(\".*?\"\\))";	
+	static String equalsRE = "((\\(\\(String\\) )?\\b(?!if\\()[^\\s\\(!][^\\s\\|\\&]*?\\)?\\.(equals|equalsIgnoreCase)[.^\\s]*?\\(\".*?\"\\))";
 	
 
 	static String equalsIgnoreCaseRE = "([^\\s\\(!][^\\s]*?equalsIgnoreCase.*?\\(\".*?\"\\))";
@@ -97,6 +110,14 @@ or
 			return result;
 	}
 	
+	
+	/**
+	 * Given an arbitrary string, this method will return the first instance of a
+	 *  Java string comparison expression, or it will return 
+	 * the string fail.
+	 * @param str
+	 * @return
+	 */
 	public static String extractEqualsMethod(String str)
 	{
 		
@@ -114,6 +135,13 @@ or
 		
 	}
 	
+	
+	/**
+	 * Given an arbitrary string, this method will rearrange every string equality check so that the 
+	 * literal is on the left side.
+	 * @param str
+	 * @return
+	 */
 	public static String fixCode(String str)
 	{
 		

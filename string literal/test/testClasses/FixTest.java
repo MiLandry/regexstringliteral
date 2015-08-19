@@ -10,13 +10,13 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
 @RunWith(value = Parameterized.class)
-public class SwapTest {
+public class FixTest {
 
 	private String input;
 	private String expected;
 	
 	
-	public SwapTest(String input, String expected) {
+	public FixTest(String input, String expected) {
 		super();
 		this.input = input;
 		this.expected = expected;
@@ -30,6 +30,7 @@ public class SwapTest {
 			{ "foo.equals(\"bar\")", "\"bar\".equals(foo)",}, 
 			{ 	"reasonCd.equalsIgnoreCase(\"FP\")", "\"FP\".equalsIgnoreCase(reasonCd)"}, 
 			{"((String) foo).equals(\"bar\")", "\"bar\".equals(((String) foo))",},
+				
 		});
 	}
 
@@ -37,7 +38,7 @@ public class SwapTest {
 
 	@Test
 	public void test() {
-		assertEquals(expected, StringUtil.swapOperators(input));
+		assertEquals(expected, StringUtil.fixCode(input));
 	}
 
 }
