@@ -1,3 +1,4 @@
+package hamsterofdark.stringLiteral;
 import java.io.IOException;
 
 

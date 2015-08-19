@@ -1,5 +1,9 @@
+package hamsterofdark.stringLiteral;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.log4j.Logger;
+
 
 
 public class StringUtil {
@@ -8,7 +12,7 @@ public class StringUtil {
 	 * literal RE unless your tests pass
 	 * 
 	 * 
-(\b(?!if\()[^\s\(!][^\s]*?(equals|equalsIgnoreCase)[.^\s]*?\(".*?"\))
+(\b(?!if\()[^\s\(!][^\s\|\&]*?(equals|equalsIgnoreCase)[.^\s]*?\(".*?"\))
 
 or
 
@@ -16,9 +20,9 @@ or
 	 * 
 	 * 
 	 */
-	
+	final static Logger logger = Logger.getLogger(StringUtil.class);
 
-	static String equalsRE = "(\\b(?!if\\()[^\\s\\(!][^\\s]*?(equals|equalsIgnoreCase)[.^\\s]*?\\(\".*?\"\\))";	
+	static String equalsRE = "(\\b(?!if\\()[^\\s\\(!][^\\s\\|\\&]*?(equals|equalsIgnoreCase)[.^\\s]*?\\(\".*?\"\\))";	
 //	static String equalsRE ="(\\(String\\) )?(\\b(?!if\\()[^\\s\\(!][^\\s]*?(equals|equalsIgnoreCase)[.^\\s]*?\\(\".*?\"\\))";
 	
 
@@ -101,7 +105,7 @@ or
     	String result = "fail";
     	while (matcher.find())
     	{
-    		System.out.println("An expression has been found: \n" + matcher.group(1) + "\n");
+    		logger.debug("An expression has been found: \n" + matcher.group(1) + "\n");
     		result = matcher.group(1);
     	}
 		
@@ -119,7 +123,7 @@ or
     	while (matcher.find())
     	{
     		String targetExpression = matcher.group(1);
-    		System.out.println("An expression has been found: \n" + matcher.group(1) + "\n");
+    		logger.debug("An expression has been found: \n" + matcher.group(1) + "\n");
     		
     		String fixedExpression = swapOperators(targetExpression);
     		fixedExpression = fixedExpression.replace("$", "\\$"); //escape $ characters
@@ -128,7 +132,7 @@ or
     		counter ++;
     	}
     	
-    	System.out.println("total literals swapped: " + counter);
+    	logger.info("total literals swapped: " + counter);
     	
     	
     	

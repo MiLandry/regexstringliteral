@@ -1,0 +1,43 @@
+package testClasses;
+import static org.junit.Assert.*;
+import hamsterofdark.stringLiteral.StringUtil;
+
+import java.util.Arrays;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
+
+@RunWith(value = Parameterized.class)
+public class ExtractTest {
+
+	private String input;
+	private String expected;
+	
+	
+	public ExtractTest(String input, String expected) {
+		super();
+		this.input = input;
+		this.expected = expected;
+	}
+	
+
+	@Parameters(name = "{index}: input :{0} output: {1}")
+	public static Iterable<Object[]> data1() {
+		return Arrays.asList(new Object[][] { 
+			{ "edEligibilityCargo.getActivityType().equals(\"PR\")", "\"PR\".equals(edEligibilityCargo.getActivityType())" }, 
+			{ "foo.equals(\"bar\")", "\"bar\".equals(foo)",}, 
+			{ 	"reasonCd.equalsIgnoreCase(\"FP\")", "\"FP\".equalsIgnoreCase(reasonCd)"}, 
+			{"((String) foo.equals(\"bar\")", "\"bar\".equals((String) foo)",},
+		});
+	}
+
+
+
+	@Test
+	public void test() {
+		assertEquals(expected, StringUtil.extractEqualsMethod(input));
+	}
+
+}
